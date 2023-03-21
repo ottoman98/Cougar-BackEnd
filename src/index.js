@@ -1,12 +1,13 @@
-import express from 'express';
-
+import express from "express";
 const app = express();
+import v1Router from './v1/routes/index.js';
+
+
+
 
 const PORT = process.env.PORT || 3000;
 
-app.get('/', () => {
-    res.send('SportElite');
-});
+app.use("/api/v1", v1Router);
 
 
 app.listen(PORT, () => {
