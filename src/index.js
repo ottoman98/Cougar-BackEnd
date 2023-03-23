@@ -1,13 +1,32 @@
 import express from "express";
+import mongoConnection from "./databases/connection.js";
+import router from "./routes/products.js";
+import dotenv from "dotenv";
+import path from "path";
+
+
+
+const dotenvConfig = dotenv.config({ path: 'src/.env' });
+const __dirname = path.resolve();
 const app = express();
-import v1Router from './v1/routes/index.js';
-
-
-
-
 const PORT = process.env.PORT || 3000;
 
-app.use("/api/v1", v1Router);
+//middelware
+app.use(express.json());
+app.use('/uploads', express.static(path.join(__dirname, 'src', 'public', 'uploads')));
+
+
+
+app.use('/', router);
+//staticFiles
+
+
+mongoConnection;
+
+
+
+
+
 
 
 app.listen(PORT, () => {
