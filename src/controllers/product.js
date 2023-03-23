@@ -14,12 +14,6 @@ const productcontroller = (req, res) => {
             const tra = req.protocol;
             fileUrls.push(JSON.stringify(fileUrl));
         });
-        console.log(fileUrls);
-
-
-
-
-
         product.imgUrls = fileUrls;
 
 
