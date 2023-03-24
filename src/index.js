@@ -20,7 +20,7 @@ app.use(express.json());
 //staticFiles
 
 app.use('/imgs', express.static(path.join(__dirname, 'public', 'uploads')));
-console.log(path.join(__dirname));
+console.log(path.join(path.join(__dirname, 'src', 'public', 'uploads')));
 
 
 
