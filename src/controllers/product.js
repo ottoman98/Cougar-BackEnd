@@ -1,7 +1,8 @@
+import { json } from "express";
 import productSchema from "../models/productSchema.js";
 
 
-const productcontroller = (req, res) => {
+const productControllerPost = (req, res) => {
     const product = productSchema(req.body);
 
 
@@ -15,15 +16,44 @@ const productcontroller = (req, res) => {
             fileUrls.push(JSON.stringify(fileUrl));
         });
         product.imgUrls = fileUrls;
-
+        console.log(files);
 
     }
     product
         .save()
-        .then((data) => { res.send(data); })
+        .then((data) => { res.json(data); })
         .catch((e) => { res.json({ error: e }); });
 
 
 };
 
-export default productcontroller;
+const productControllerGet = (req, res) => {
+    productSchema.find()
+        .then((data) => { res.json(data); })
+        .catch((e) => { res.json({ error: e }); });;
+};
+
+const productControllerPut = (req, res) => {
+    const { id } = req.params;
+    const { nombre, cantidad, precio, categoria, colores, tallas, descuento, imgUrls } = req.body;
+
+    productSchema.updateOne({ _id: id }, { $set: { nombre, cantidad, precio, categoria, colores, tallas, descuento, imgUrls } })
+        .then((data) => { res.json(data); })
+        .catch((e) => { res.json({ error: e }); });;
+};
+
+const productControllerDelete = (req, res) => {
+    const { id } = req.params;
+
+
+    productSchema.findOneAndRemove({ _id: id })
+        .then((data) => { res.json(data); })
+        .catch((e) => { res.json({ error: e }); });;
+};
+
+
+const controllers = { productControllerPost, productControllerGet, productControllerPut, productControllerDelete };
+
+
+
+export default controllers;

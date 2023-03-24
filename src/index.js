@@ -1,8 +1,10 @@
 import express from "express";
-import mongoConnection from "./databases/connection.js";
 import router from "./routes/products.js";
 import dotenv from "dotenv";
 import path from "path";
+import cors from 'cors';
+//connection
+import mongoConnection from "./databases/connection.js";
 
 
 
@@ -12,16 +14,17 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 //middelware
+app.use(cors());
 app.use(express.json());
+//staticFiles
 app.use('/uploads', express.static(path.join(__dirname, 'src', 'public', 'uploads')));
 
 
 
 app.use('/', router);
-//staticFiles
 
 
-mongoConnection;
+
 
 
 
