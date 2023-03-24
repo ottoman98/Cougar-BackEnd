@@ -1,31 +1,44 @@
-import { json } from "express";
 import productSchema from "../models/productSchema.js";
 
 
 const productControllerPost = (req, res) => {
-    const product = productSchema(req.body);
+    const colores = req.body.colores.split(",");
+    const tallas = req.body.tallas.split(",");
 
+    const product = new productSchema({
+        nombre: req.body.nombre,
+        cantidad: req.body.cantidad,
+        precio: req.body.precio,
+        categoria: req.body.categoria,
+        colores: colores,
+        tallas: tallas,
+        descuento: req.body.descuento,
+        imgUrls: req.body.imgUrls
+    });
 
     if (req.files) {
-        const filesname = req.files;
         const files = req.files;
         const fileUrls = [];
         files.forEach((file) => {
-            const fileUrl = `${req.protocol}://${req.hostname}:${process.env.PORT}/uploads/${file.filename}`;
-            const tra = req.protocol;
-            fileUrls.push(JSON.stringify(fileUrl));
+            const fileUrl = `sss`;
+
+            fileUrls.push(fileUrl);
         });
         product.imgUrls = fileUrls;
-        console.log(files);
-
     }
+
     product
         .save()
-        .then((data) => { res.json(data); })
-        .catch((e) => { res.json({ error: e }); });
-
+        .then((data) => {
+            res.json(data);
+        })
+        .catch((e) => {
+            res.json({ error: e });
+        });
+    console.log(product);
 
 };
+
 
 const productControllerGet = (req, res) => {
     productSchema.find()

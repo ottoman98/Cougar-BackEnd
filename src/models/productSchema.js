@@ -33,6 +33,10 @@ const productSchemaModel = mongoose.Schema({
         type: [String],
         default: ['123123'],
 
+    },
+    created: {
+        type: Date,
+        default: Date.now
     }
 
 });
@@ -41,7 +45,6 @@ productSchemaModel.methods.setImageUrl = function setImageUrl(filename) {
 
     const host = process.env.APP_HOST;
     const port = process.env.PORT;
-    //this.imgUrls = `${host}:${port}/uploads/${filename}`;
     this.imgUrls = filename;
 
 
