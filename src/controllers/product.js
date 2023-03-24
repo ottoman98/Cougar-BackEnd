@@ -20,7 +20,7 @@ const productControllerPost = (req, res) => {
         const files = req.files;
         const fileUrls = [];
         files.forEach((file) => {
-            const fileUrl = `${req.protocol}://${req.hostname}imgs/${file.filename}`;
+            const fileUrl = `${req.protocol}://${req.hostname}/imgs/${file.filename}`;
 
             fileUrls.push(fileUrl);
         });
