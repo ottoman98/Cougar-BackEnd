@@ -19,8 +19,8 @@ app.use(express.json());
 
 //staticFiles
 
-app.use('/test', express.static(path.join(__dirname, 'src')));
-console.log(path.join(__dirname, 'src'));
+app.use('/test', express.static(path.join('/opt/render / project / src / src / src')));
+console.log(path.join('/opt/render / project / src / src / src'));
 
 
 
