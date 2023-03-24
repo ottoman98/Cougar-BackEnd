@@ -20,7 +20,7 @@ const productControllerPost = (req, res) => {
         const files = req.files;
         const fileUrls = [];
         files.forEach((file) => {
-            const fileUrl = `${req.protocol}://${req.hostname}:${process.env.PORT}/uploads/${file.filename}`;
+            const fileUrl = 'titulo';
 
             fileUrls.push(fileUrl);
         });
