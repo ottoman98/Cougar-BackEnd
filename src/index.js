@@ -19,7 +19,7 @@ app.use(express.json());
 
 //staticFiles
 
-app.use('/test', express.static(path.join(__dirname)));
+app.use('/imgs', express.static(path.join(__dirname, 'public', 'uploads')));
 console.log(path.join(__dirname));
 
 
