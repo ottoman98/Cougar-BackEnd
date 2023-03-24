@@ -17,8 +17,8 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 //staticFiles
-app.use('/uploads', express.static(path.join(__dirname, 'src', 'public', 'uploads')));
-console.log(path.join(__dirname, 'src', 'public', 'uploads'));
+app.use('/uploads', express.static(path.join(__dirname, 'public', 'uploads')));
+console.log(path.join(__dirname, 'public', 'uploads'));
 
 
 
