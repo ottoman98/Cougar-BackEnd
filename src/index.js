@@ -16,9 +16,11 @@ const PORT = process.env.PORT || 3000;
 //middelware
 app.use(cors());
 app.use(express.json());
+
 //staticFiles
-app.use('/uploads', express.static(path.join(__dirname, 'src', 'public', 'uploads')));
-console.log(path.join(__dirname, 'src', 'public', 'uploads'));
+
+app.use('/test', express.static(path.join(__dirname, 'src')));
+console.log(path.join(__dirname, 'src'));
 
 
 
