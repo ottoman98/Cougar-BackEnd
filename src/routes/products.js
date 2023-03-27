@@ -19,7 +19,7 @@ router
     })
     .get('/product', (req, res) => {
         controllers.productControllerGet(req, res);
-        console.log('get exitoso');
+
 
 
     })
