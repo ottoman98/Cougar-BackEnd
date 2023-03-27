@@ -3,6 +3,7 @@ import router from "./routes/products.js";
 import dotenv from "dotenv";
 import path from "path";
 import cors from 'cors';
+
 //connection
 import mongoConnection from "./databases/connection.js";
 
@@ -20,13 +21,14 @@ app.use(express.json());
 //staticFiles
 
 app.use('/imgs', express.static(path.join(__dirname, 'public', 'uploads')));
-console.log('path');
-console.log(path.join(__dirname));
 
 
 
 
-app.use('/', router);
+
+app.use('/', router, (req, res) => {
+    res.send(path.join(__dirname, 'public', 'uploads'));
+});
 
 
 
