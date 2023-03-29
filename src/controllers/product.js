@@ -47,15 +47,6 @@ const productControllerGet = (req, res) => {
 };
 
 const productControllerPut = (req, res) => {
-    const { id } = req.params;
-    const { nombre, cantidad, precio, categoria, colores, tallas, descuento, imgUrls } = req.body;
-
-    productSchema.updateOne({ _id: id }, { $set: { nombre, cantidad, precio, categoria, colores, tallas, descuento, imgUrls } })
-        .then((data) => { res.json(data); })
-        .catch((e) => { res.json({ error: e }); });;
-};
-
-const productControllerDelete = (req, res) => {
     const productId = req.params.id; // obtener el ID del producto a actualizar
     const updatedProduct = {
         nombre: req.body.nombre,
@@ -89,14 +80,14 @@ const productControllerDelete = (req, res) => {
         });
 };
 
+const productControllerDelete = (req, res) => {
+    const { id } = req.params;
 
 
-
-
-
-
-
-
+    productSchema.findOneAndRemove({ _id: id })
+        .then((data) => { res.json(data); })
+        .catch((e) => { res.json({ error: e }); });;
+};
 
 
 const controllers = { productControllerPost, productControllerGet, productControllerPut, productControllerDelete };
