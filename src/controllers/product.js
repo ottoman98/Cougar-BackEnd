@@ -56,13 +56,47 @@ const productControllerPut = (req, res) => {
 };
 
 const productControllerDelete = (req, res) => {
-    const { id } = req.params;
+    const productId = req.params.id; // obtener el ID del producto a actualizar
+    const updatedProduct = {
+        nombre: req.body.nombre,
+        cantidad: req.body.cantidad,
+        precio: req.body.precio,
+        categoria: req.body.categoria,
+        colores: req.body.colores.split(","),
+        tallas: req.body.tallas.split(","),
+        descuento: req.body.descuento,
+        imgUrls: req.body.imgUrls
+    };
 
+    if (req.files) {
+        const files = req.files;
+        const fileUrls = [];
+        files.forEach((file) => {
+            const fileUrl = `${req.protocol}://${req.hostname}/imgs/${file.filename}`;
+            fileUrls.push(fileUrl);
+        });
+        updatedProduct.imgUrls = fileUrls;
+    }
 
-    productSchema.findOneAndRemove({ _id: id })
-        .then((data) => { res.json(data); })
-        .catch((e) => { res.json({ error: e }); });;
+    // Buscar el producto existente y actualizarlo
+    productSchema
+        .findOneAndUpdate({ _id: productId }, updatedProduct, { new: true })
+        .then((data) => {
+            res.json(data);
+        })
+        .catch((e) => {
+            res.json({ error: e });
+        });
 };
+
+
+
+
+
+
+
+
+
 
 
 const controllers = { productControllerPost, productControllerGet, productControllerPut, productControllerDelete };

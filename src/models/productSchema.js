@@ -31,7 +31,7 @@ const productSchemaModel = mongoose.Schema({
     },
     imgUrls: {
         type: [String],
-        default: ['123123'],
+        default: [''],
 
     },
     created: {
