@@ -48,11 +48,11 @@ const productControllerGet = (req, res) => {
 
 const productControllerPut = (req, res) => {
     const { id } = req.params;
-    const { name, description, price } = req.body;
+    const update = { $set: req.body }; // utiliza el operador $set para actualizar todos los campos del documento
+    const options = { new: true }; // devolver el documento actualizado
 
-    productSchema.findByIdAndUpdate(
-        id
-    )
+    productSchema
+        .findByIdAndUpdate(id, update, options)
         .then((updatedProduct) => {
             res.json(updatedProduct);
         })
@@ -60,6 +60,7 @@ const productControllerPut = (req, res) => {
             res.status(500).json({ error });
         });
 };
+
 
 
 const productControllerDelete = (req, res) => {
