@@ -51,9 +51,7 @@ const productControllerPut = (req, res) => {
     const { name, description, price } = req.body;
 
     productSchema.findByIdAndUpdate(
-        id,
-        { name, description, price },
-        { new: true }
+        id
     )
         .then((updatedProduct) => {
             res.json(updatedProduct);
