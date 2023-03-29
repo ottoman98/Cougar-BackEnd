@@ -47,38 +47,22 @@ const productControllerGet = (req, res) => {
 };
 
 const productControllerPut = (req, res) => {
-    const productId = req.params.id; // obtener el ID del producto a actualizar
-    const updatedProduct = {
-        nombre: req.body.nombre,
-        cantidad: req.body.cantidad,
-        precio: req.body.precio,
-        categoria: req.body.categoria,
-        colores: req.body.colores.split(","),
-        tallas: req.body.tallas.split(","),
-        descuento: req.body.descuento,
-        imgUrls: req.body.imgUrls
-    };
+    const { id } = req.params;
+    const { name, description, price } = req.body;
 
-    if (req.files) {
-        const files = req.files;
-        const fileUrls = [];
-        files.forEach((file) => {
-            const fileUrl = `${req.protocol}://${req.hostname}/imgs/${file.filename}`;
-            fileUrls.push(fileUrl);
-        });
-        updatedProduct.imgUrls = fileUrls;
-    }
-
-    // Buscar el producto existente y actualizarlo
-    productSchema
-        .findOneAndUpdate({ _id: productId }, updatedProduct, { new: true })
-        .then((data) => {
-            res.json(data);
+    productSchema.findByIdAndUpdate(
+        id,
+        { name, description, price },
+        { new: true }
+    )
+        .then((updatedProduct) => {
+            res.json(updatedProduct);
         })
-        .catch((e) => {
-            res.json({ error: e });
+        .catch((error) => {
+            res.status(500).json({ error });
         });
 };
+
 
 const productControllerDelete = (req, res) => {
     const { id } = req.params;
