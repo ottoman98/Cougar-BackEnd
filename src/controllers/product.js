@@ -45,14 +45,14 @@ const productControllerGet = (req, res) => {
         .then((data) => { res.json(data); })
         .catch((e) => { res.json({ error: e }); });;
 };
-
 const productControllerPut = (req, res) => {
     const { id } = req.params;
-    const update = { $set: req.body }; // utiliza el operador $set para actualizar todos los campos del documento
-    const options = { new: true }; // devolver el documento actualizado
+    const { nombre, cantidad, precio, categoria, colores, tallas, descuento } = req.body;
+
+    const updates = { nombre, cantidad, precio, categoria, colores, tallas, descuento };
 
     productSchema
-        .findByIdAndUpdate(id, update, options)
+        .findByIdAndUpdate(id, updates, { new: true })
         .then((updatedProduct) => {
             res.json(updatedProduct);
         })
