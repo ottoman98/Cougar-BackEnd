@@ -32,6 +32,7 @@ router
     })
     .get('/product/:id', (req, res) => {
         controllers.productControllerById(req, res);
+        console.log(res);
     });
 
 
