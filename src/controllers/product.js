@@ -75,9 +75,9 @@ const productControllerDelete = (req, res) => {
 };
 const productControllerById = (req, res) => {
 
-    const { id } = req.
+    const { id } = req.params;
 
-        productSchema.findById(id)
+    productSchema.findById(id)
         .then((data) => { res.json(data); })
         .catch((e) => { res.json({ error: e }); });
 };
