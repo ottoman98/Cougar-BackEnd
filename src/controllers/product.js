@@ -50,10 +50,36 @@ const productControllerGet = (req, res) => {
 
 const productControllerPut = (req, res) => {
     const { id } = req.params;
+    const colores = req.body.colores.split(",");
+    const tallas = req.body.tallas.split(",");
+
+    const product = new productSchema({
+        nombre: req.body.nombre,
+        cantidad: req.body.cantidad,
+        precio: req.body.precio,
+        categoria: req.body.categoria,
+        colores: colores,
+        tallas: tallas,
+        descuento: req.body.descuento,
+        imgUrls: req.body.imgUrls
+    });
+
+
+    if (req.files) {
+        const files = req.files;
+        const fileUrls = [];
+        files.forEach((file) => {
+            const fileUrl = `${req.protocol}://${req.hostname}/imgs/${file.filename}`;
+
+            fileUrls.push(fileUrl);
+        });
+        product.imgUrls = fileUrls;
+    }
+
     const update = { $set: req.body };
     const options = { new: true };
 
-    console.log(req.body);
+
     productSchema
         .findByIdAndUpdate(id, update, options)
         .then((updatedProduct) => {
