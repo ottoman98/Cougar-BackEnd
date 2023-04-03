@@ -29,6 +29,9 @@ router
     .delete("/product/:id", (req, res) => {
         controllers.productControllerDelete(req, res);
 
+    })
+    .get('/product/:id', (req, res) => {
+        controllers.productControllerById(req, res);
     });
 
 

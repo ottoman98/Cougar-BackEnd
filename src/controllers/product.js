@@ -45,14 +45,16 @@ const productControllerGet = (req, res) => {
         .then((data) => { res.json(data); })
         .catch((e) => { res.json({ error: e }); });;
 };
+
+
 const productControllerPut = (req, res) => {
     const { id } = req.params;
-    const { nombre, cantidad, precio, categoria, colores, tallas, descuento } = req.body;
+    const update = { $set: req.body }; // utiliza el operador $set para actualizar todos los campos del documento
+    const options = { new: true }; // devolver el documento actualizado
 
-    const updates = { nombre, cantidad, precio, categoria, colores, tallas, descuento };
-
+    console.log(req.body);
     productSchema
-        .findByIdAndUpdate(id, updates, { new: true })
+        .findByIdAndUpdate(id, update, options)
         .then((updatedProduct) => {
             res.json(updatedProduct);
         })
@@ -71,9 +73,20 @@ const productControllerDelete = (req, res) => {
         .then((data) => { res.json(data); })
         .catch((e) => { res.json({ error: e }); });;
 };
+const productControllerById = (req, res) => {
+
+    const { id } = req.
+
+        productSchema.findById(id)
+        .then((data) => { res.json(data); })
+        .catch((e) => { res.json({ error: e }); });
+};
 
 
-const controllers = { productControllerPost, productControllerGet, productControllerPut, productControllerDelete };
+
+
+
+const controllers = { productControllerPost, productControllerGet, productControllerPut, productControllerDelete, productControllerById };
 
 
 
