@@ -23,7 +23,7 @@ router
 
 
     })
-    .put("/product/:id", (req, res) => {
+    .put("/product/:id", upload, (req, res) => {
         controllers.productControllerPut(req, res);
     })
     .delete("/product/:id", (req, res) => {

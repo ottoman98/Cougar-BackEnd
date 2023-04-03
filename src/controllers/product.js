@@ -16,6 +16,7 @@ const productControllerPost = (req, res) => {
         imgUrls: req.body.imgUrls
     });
 
+
     if (req.files) {
         const files = req.files;
         const fileUrls = [];
@@ -49,8 +50,8 @@ const productControllerGet = (req, res) => {
 
 const productControllerPut = (req, res) => {
     const { id } = req.params;
-    const update = { $set: req.body }; // utiliza el operador $set para actualizar todos los campos del documento
-    const options = { new: true }; // devolver el documento actualizado
+    const update = { $set: req.body };
+    const options = { new: true };
 
     console.log(req.body);
     productSchema
