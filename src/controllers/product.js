@@ -61,17 +61,7 @@ const productControllerGet = (req, res) => {
 const productControllerPut = (req, res) => {
     const { id } = req.params;
 
-    let colores = '';
-    if (req.body.colores) {
-        colores = req.body.colores.split(",");
 
-    }
-    let tallas = '';
-
-    if (req.body.tallas) {
-        tallas = req.body.tallas.split(",");
-
-    }
 
     const product = new productSchema({
         _id: id,
@@ -79,8 +69,8 @@ const productControllerPut = (req, res) => {
         cantidad: req.body.cantidad,
         precio: req.body.precio,
         categoria: req.body.categoria,
-        colores: colores,
-        tallas: tallas,
+        colores: req.body.colores,
+        tallas: req.body.tallas,
         descuento: req.body.descuento,
         imgUrls: req.body.imgUrls
     });
