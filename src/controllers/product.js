@@ -36,6 +36,7 @@ const productControllerPost = (req, res) => {
         });
         product.imgUrls = fileUrls;
     }
+    console.log(product);
 
     product
         .save()
