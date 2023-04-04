@@ -2,8 +2,17 @@ import productSchema from "../models/productSchema.js";
 
 
 const productControllerPost = (req, res) => {
-    const colores = req.body.colores.split(",");
-    const tallas = req.body.tallas.split(",");
+    let colores = '';
+    if (req.body.colores) {
+        colores = req.body.colores.split(",");
+
+    }
+    let tallas = '';
+
+    if (req.body.tallas) {
+        tallas = req.body.tallas.split(",");
+
+    }
 
     const product = new productSchema({
         nombre: req.body.nombre,
@@ -50,10 +59,21 @@ const productControllerGet = (req, res) => {
 
 const productControllerPut = (req, res) => {
     const { id } = req.params;
-    const colores = req.body.colores.split(",");
-    const tallas = req.body.tallas.split(",");
+
+    let colores = '';
+    if (req.body.colores) {
+        colores = req.body.colores.split(",");
+
+    }
+    let tallas = '';
+
+    if (req.body.tallas) {
+        tallas = req.body.tallas.split(",");
+
+    }
 
     const product = new productSchema({
+        _id: id,
         nombre: req.body.nombre,
         cantidad: req.body.cantidad,
         precio: req.body.precio,
@@ -76,8 +96,12 @@ const productControllerPut = (req, res) => {
         product.imgUrls = fileUrls;
     }
 
-    const update = { $set: req.body };
+    console.log(product);
+
+
+    const update = { $set: product };
     const options = { new: true };
+
 
 
     productSchema
