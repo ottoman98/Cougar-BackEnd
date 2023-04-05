@@ -17,7 +17,9 @@ const productControllerPost = (req, res) => {
         colores: colores,
         tallas: tallas,
         descuento: req.body.descuento,
-        imgUrls: req.body.imgUrls
+        descripcion: req.body.descripcion,
+        imgUrls: req.body.imgUrls,
+
     });
 
 
@@ -67,6 +69,7 @@ const productControllerPut = (req, res) => {
         colores: req.body.colores,
         tallas: req.body.tallas,
         descuento: req.body.descuento,
+        descripcion: req.body.descripcion,
         imgUrls: req.body.imgUrls
     });
 
