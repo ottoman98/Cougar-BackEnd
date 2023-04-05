@@ -22,7 +22,7 @@ app.use(express.json());
 
 app.use('/imgs', express.static(path.join(__dirname, 'public', 'uploads')));
 
-app.use('/', routerV1);
+app.use('/product/v1', routerV1);
 
 
 app.listen(PORT, () => {
