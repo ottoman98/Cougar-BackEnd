@@ -17,6 +17,8 @@ app.use(express.json());
 //staticFiles
 app.use('/imgs', express.static(path.join(__dirname, 'public', 'uploads')));
 
+//route
+
 app.use('/product/v1', routerV1);
 
 
