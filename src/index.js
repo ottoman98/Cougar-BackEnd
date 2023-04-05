@@ -15,14 +15,17 @@ app.use(cors());
 app.use(express.json());
 
 
+
 //staticFiles
 
 app.use('/imgs', express.static(path.join(__dirname, 'public', 'uploads')));
+
 
 app.use('/product/v1', routerV1);
 
 
 app.listen(PORT, () => {
+
 
     console.log('😎 Running');
 });
