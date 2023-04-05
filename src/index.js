@@ -10,14 +10,13 @@ const __dirname = path.resolve();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-//middlewares
+//middelware
 app.use(cors());
 app.use(express.json());
 
 //staticFiles
-app.use('/imgs', express.static(path.join(__dirname, 'public', 'uploads')));
 
-//route
+app.use('/imgs', express.static(path.join(__dirname, 'public', 'uploads')));
 
 app.use('/product/v1', routerV1);
 
