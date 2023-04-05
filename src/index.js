@@ -1,7 +1,7 @@
 import express from "express";
-import routerV1 from "./v1/routes/productsRoutes.js";
 import path from "path";
 import cors from 'cors';
+import routerV1 from "./v1/routes/productsRoutes.js";
 //connection
 import mongoConnection from "./databases/connection.js";
 
@@ -23,5 +23,6 @@ app.use('/product/v1', routerV1);
 
 
 app.listen(PORT, () => {
+
     console.log('😎 Running');
 });
