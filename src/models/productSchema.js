@@ -29,6 +29,10 @@ const productSchemaModel = mongoose.Schema({
         type: Number,
         default: 0
     },
+    descripcion: {
+        type: String,
+        default: ''
+    },
     imgUrls: {
         type: [String],
         default: [''],
