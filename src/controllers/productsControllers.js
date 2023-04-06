@@ -1,7 +1,24 @@
 import productSchema from "../models/productSchema.js";
 
 
+const productControllerGet = (req, res) => {
+
+    productSchema.find()
+        .then((data) => { res.send(data); })
+        .catch((e) => { res.json({ error: e }); });;
+};
+
+
+
 const productControllerPost = (req, res) => {
+
+    const camposObligatorios = ['nombre', 'cantidad', 'precio', 'categoria', 'colores', 'tallas', 'genero', 'imgUrls'];
+
+    for (const campo of camposObligatorios) {
+        if (!req.body[campo] || req.body[campo].length === 0) {
+            return res.status(400).json({ error: `El campo ${campo} es obligatorio` });
+        }
+    }
 
 
     let colores = req.body.colores.split(",");
@@ -46,12 +63,7 @@ const productControllerPost = (req, res) => {
 };
 
 
-const productControllerGet = (req, res) => {
 
-    productSchema.find()
-        .then((data) => { res.json(data); })
-        .catch((e) => { res.json({ error: e }); });;
-};
 
 
 
@@ -61,7 +73,9 @@ const productControllerPut = (req, res) => {
 
     const { id } = req.params;
 
+
     const product = new productSchema({
+
         _id: id,
         nombre: req.body.nombre,
         cantidad: req.body.cantidad,
@@ -74,6 +88,17 @@ const productControllerPut = (req, res) => {
         imgUrls: req.body.imgUrls,
         genero: req.body.genero
     });
+
+    let oldData;
+    async function arraysValiadations() {
+        if (req.body.colores == undefined) {
+            product.colores = oldData.colores;
+        }
+        if (req.body.tallas == undefined) {
+            product.tallas = oldData.tallas;
+        }
+
+    }
 
 
     if (req.files) {
@@ -91,7 +116,12 @@ const productControllerPut = (req, res) => {
     const options = { new: true };
 
     productSchema
-        .findByIdAndUpdate(id, update, options)
+        .findById(id)
+        .then((oldProduct) => {
+            oldData = oldProduct;
+            arraysValiadations();
+            return productSchema.findByIdAndUpdate(id, update, options);
+        })
         .then((updatedProduct) => {
             res.json(updatedProduct);
         })
@@ -112,20 +142,9 @@ const productControllerDelete = (req, res) => {
 
 };
 
-const productControllerGetById = (req, res) => {
-
-    const { id } = req.params;
-
-    productSchema.findById(id)
-        .then((data) => { res.json(data); })
-        .catch((e) => { res.json({ error: e }); });
-};
 
 
-
-
-
-const controllers = { productControllerPost, productControllerGet, productControllerPut, productControllerDelete, productControllerGetById, productControllerGetById };
+const controllers = { productControllerPost, productControllerGet, productControllerPut, productControllerDelete };
 
 
 

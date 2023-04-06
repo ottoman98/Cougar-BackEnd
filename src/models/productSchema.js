@@ -27,15 +27,16 @@ const productSchemaModel = mongoose.Schema({
     },
     descuento: {
         type: Number,
-        default: 0
+
     },
     descripcion: {
         type: String,
-        default: ''
+
     },
+
     imgUrls: {
         type: [String],
-        default: [''],
+
 
     },
     genero: {

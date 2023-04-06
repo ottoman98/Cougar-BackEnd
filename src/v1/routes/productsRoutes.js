@@ -7,7 +7,6 @@ const routerV1 = express.Router();
 
 routerV1
     .get('/', controllers.productControllerGet)
-    .get('/:id', controllers.productControllerGetById)
     .post('/', upload, controllers.productControllerPost)
     .put("/:id", upload, controllers.productControllerPut)
     .delete("/:id", controllers.productControllerDelete);
