@@ -12,13 +12,15 @@ const productControllerGet = (req, res) => {
 
 const productControllerPost = (req, res) => {
 
-    const camposObligatorios = ['nombre', 'cantidad', 'precio', 'categoria', 'colores', 'tallas', 'genero', 'imgUrls'];
+    const camposObligatorios = ['nombre', 'cantidad', 'precio', 'categoria', 'colores', 'tallas', 'genero'];
+
 
     for (const campo of camposObligatorios) {
         if (!req.body[campo] || req.body[campo].length === 0) {
             return res.status(400).json({ error: `El campo ${campo} es obligatorio` });
         }
     }
+
 
 
     let colores = req.body.colores.split(",");
