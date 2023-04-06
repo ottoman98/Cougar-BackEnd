@@ -91,16 +91,36 @@ const productControllerPut = (req, res) => {
         genero: req.body.genero
     });
 
+
     let oldData;
-    async function arraysValiadations() {
+    console.log(req.files.length != 0);
+
+    function arraysValiadations() {
         if (req.body.colores == undefined) {
             product.colores = oldData.colores;
         }
         if (req.body.tallas == undefined) {
             product.tallas = oldData.tallas;
         }
+        if (req.files.length == 0) {
+            product.imgUrls = oldData.imgUrls;
+        }
+
+        if (req.files.length != 0) {
+            const files = req.files;
+            const fileUrls = [];
+            files.forEach((file) => {
+                const fileUrl = `${req.protocol}://${req.hostname}/imgs/${file.filename}`;
+
+                fileUrls.push(fileUrl);
+            });
+            product.imgUrls = fileUrls;
+        }
+
+
 
     }
+
 
 
     if (req.files) {
