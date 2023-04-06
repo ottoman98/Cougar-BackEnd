@@ -38,6 +38,10 @@ const productSchemaModel = mongoose.Schema({
         default: [''],
 
     },
+    genero: {
+        type: String,
+        required: true
+    },
     created: {
         type: Date,
         default: Date.now
