@@ -71,7 +71,8 @@ const productControllerPut = (req, res) => {
         tallas: req.body.tallas,
         descuento: req.body.descuento,
         descripcion: req.body.descripcion,
-        imgUrls: req.body.imgUrls
+        imgUrls: req.body.imgUrls,
+        genero: req.body.genero
     });
 
 
