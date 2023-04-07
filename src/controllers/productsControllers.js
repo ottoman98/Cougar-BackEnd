@@ -93,7 +93,7 @@ const productControllerPut = (req, res) => {
 
 
     let oldData;
-    console.log(req.files.length != 0);
+
 
     function arraysValiadations() {
         if (req.body.colores == undefined) {
