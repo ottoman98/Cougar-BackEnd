@@ -11,7 +11,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 //middleware
-app.use(cors(['http://localhost:5173']));
+app.use(cors());
 app.use(express.json());
 
 
