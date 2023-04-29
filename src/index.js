@@ -8,7 +8,7 @@ import mongoConnection from "./databases/connection.js";
 
 const __dirname = path.resolve();
 const app = express();
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 3000
 
 //middleware
 app.use(cors());
