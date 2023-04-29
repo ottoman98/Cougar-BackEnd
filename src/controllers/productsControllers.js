@@ -47,7 +47,7 @@ const productControllerPost = (req, res) => {
         const files = req.files;
         const fileUrls = [];
         files.forEach((file) => {
-            const fileUrl = `https://sport-elite-back.onrender.com/imgs/${file.filename}`;
+            const fileUrl = `https://cougar.onrender.com/imgs/${file.filename}`;
 
             fileUrls.push(fileUrl);
         });
