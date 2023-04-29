@@ -1,9 +1,9 @@
 import express from "express";
 import path from "path";
 import cors from 'cors';
-import routerV1 from "./v1/routes/productsRoutes.js";
+import routerV1 from "./src/v1/routes/productsRoutes.js";
 //connection
-import mongoConnection from "./databases/connection.js";
+import mongoConnection from "./src/databases/connection.js";
 
 
 const __dirname = path.resolve();
